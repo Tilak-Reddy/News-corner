@@ -1,36 +1,30 @@
 // Fetch news articles based on category 
 async function fetchNews(category) {
     let url = '';
-    let apiKey = '';
+    const apiKey = 'YOUR_MEDISTACK_API_KEY'; // Use your Mediastack API key here
 
     switch (category) {
         case 'politics':
-            apiKey = 'c51e28f22dee429f8536312bb87e4616'; // Example API Key for politics
-            url = `https://newsapi.org/v2/top-headlines?country=in&category=politics&apiKey=${apiKey}`;
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=politics&languages=en`;
             break;
         case 'sports':
-            apiKey = 'a99ee6c059282c7aa3e69e880de401c5'; // Example API Key for sports
-            url = `https://newsapi.org/v2/top-headlines?category=sports&apiKey=${apiKey}`;
+            // Use Mediastack API for sports category
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=sports&languages=en`;
             break;
         case 'entertainment':
-            apiKey = 'pub_61364058d1e5d42e8d5feffdc614528ad2269'; // Example API Key for entertainment
-            url = `https://newsdata.io/api/1/news?category=entertainment&apikey=${apiKey}`;
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=entertainment&languages=en`;
             break;
         case 'tech':
-            apiKey = 'pub_61702195288cf5cf19a9a0a3ec3e01f9eb71'; // Example API Key for tech
-            url = `https://newsdata.io/api/1/news?category=tech&apikey=${apiKey}`;
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=technology&languages=en`;
             break;
         case 'general':
-            apiKey = 'bad2353e329d1174bd9a451e07af182'; // Example API Key for general
-            url = `https://gnews.io/api/v4/search?q=general&token=${apiKey}`;
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en`;
             break;
         case 'health':
-            apiKey = '1d16725f76aa4e6f8f651c33d428ceb8'; // Example API Key for health
-            url = `https://worldnewsapi.com/api/1/news?category=health&apikey=${apiKey}`;
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=health&languages=en`;
             break;
         case 'stock':
-            apiKey = 'ZM6Vfu42UZS4TdqfFPKGRp9MaEhZq6H4'; // Example API Key for stock market
-            url = `https://financialmodelingprep.com/api/v3/stock_news?apikey=${apiKey}`;
+            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=business&languages=en`;
             break;
         default:
             console.error('Invalid category');
@@ -50,8 +44,8 @@ async function fetchNews(category) {
             console.log('Fetched data:', data); // Log the fetched data
 
             // Check if articles are returned
-            if (data.articles && data.articles.length > 0) {
-                displayNews(data.articles, category);
+            if (data.data && data.data.length > 0) {
+                displayNews(data.data, category);
             } else {
                 console.error('No articles found or invalid data format');
             }
@@ -65,7 +59,7 @@ async function fetchNews(category) {
 
 // Function to display the fetched news articles
 function displayNews(articles, category) {
-    const newsContainer = document.getElementById('news-category');
+    const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ''; // Clear previous content
 
     // Create a title for the category
@@ -76,7 +70,7 @@ function displayNews(articles, category) {
     // Loop through the articles and create HTML elements to display them
     articles.forEach(article => {
         const articleDiv = document.createElement('div');
-        articleDiv.classList.add('news-item');
+        articleDiv.classList.add('news-article');
 
         const title = document.createElement('h3');
         title.textContent = article.title;
@@ -98,12 +92,9 @@ function displayNews(articles, category) {
 }
 
 // Event listener for category click
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.category-link').forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default link behavior
-            const category = event.target.dataset.category;
-            fetchNews(category);
-        });
+document.querySelectorAll('.category-link').forEach(link => {
+    link.addEventListener('click', (event) => {
+        const category = event.target.dataset.category;
+        fetchNews(category);
     });
 });
