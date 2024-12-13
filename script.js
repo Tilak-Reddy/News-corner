@@ -1,6 +1,6 @@
 // Fetch news articles based on category
 async function fetchNews(category) {
-    const apiKey = 'a99ee6c059282c7aa3e69e880de401c5'; // Use your Mediastack API key
+    const apiKey = 'a99ee6c059282c7aa3e69e880de401c5'; // Replace with your API key
     let url = '';
 
     // Define URL based on category
@@ -14,13 +14,21 @@ async function fetchNews(category) {
         case 'general':
             url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en`;
             break;
+        case 'health':
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=health&languages=en`;
+            break;
+        case 'tech':
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=technology&languages=en`;
+            break;
+        case 'entertainment':
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=entertainment&languages=en`;
+            break;
         default:
             console.error('Invalid category');
             return;
     }
 
     try {
-        // Fetch data
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -34,6 +42,7 @@ async function fetchNews(category) {
             displayNews(data.data, category);
         } else {
             console.error('No articles found.');
+            document.getElementById('news-container').innerHTML = '<p>No articles available for this category.</p>';
         }
     } catch (error) {
         console.error('Error fetching news:', error.message);
@@ -43,24 +52,13 @@ async function fetchNews(category) {
 // Display the fetched news articles
 function displayNews(articles, category) {
     const newsContainer = document.getElementById('news-container');
-
-    if (!newsContainer) {
-        console.error('News container element not found in the DOM.');
-        return;
-    }
-
-    // Clear previous news content
     newsContainer.innerHTML = '';
 
-    // Add category title
     const categoryTitle = document.createElement('h2');
     categoryTitle.textContent = `${category.charAt(0).toUpperCase() + category.slice(1)} News`;
     newsContainer.appendChild(categoryTitle);
 
-    // Loop through and display each article
     articles.forEach(article => {
-        console.log('Rendering article:', article.title);
-
         const articleDiv = document.createElement('div');
         articleDiv.classList.add('news-article');
 
@@ -85,7 +83,7 @@ function displayNews(articles, category) {
 // Add event listener to categories
 document.querySelectorAll('.category-link').forEach(link => {
     link.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent default behavior
+        event.preventDefault();
         const category = event.target.dataset.category;
         if (category) {
             fetchNews(category);
