@@ -5,26 +5,26 @@ async function fetchNews(category) {
 
     switch (category) {
         case 'politics':
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=politics&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=politics&languages=en`;
             break;
         case 'sports':
             // Use Mediastack API for sports category
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=sports&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=sports&languages=en`;
             break;
         case 'entertainment':
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=entertainment&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=entertainment&languages=en`;
             break;
         case 'tech':
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=technology&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=technology&languages=en`;
             break;
         case 'general':
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en`;
             break;
         case 'health':
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=health&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=health&languages=en`;
             break;
         case 'stock':
-            url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&categories=business&languages=en`;
+            url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=business&languages=en`;
             break;
         default:
             console.error('Invalid category');
