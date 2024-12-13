@@ -26,16 +26,15 @@ async function fetchNews(category) {
             return;
     }
 
+    // Log the generated API URL
+    console.log('API URL:', url);
+
     try {
         const response = await fetch(url);
-        console.log('API Response Status:', response.status); // Log status
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
         const data = await response.json();
-        console.log('Fetched Data:', data); // Log API data
+
+        // Log the API response
+        console.log('API Response:', data);
 
         if (data.data && data.data.length > 0) {
             displayNews(data.data, category);
