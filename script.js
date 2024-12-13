@@ -1,7 +1,7 @@
 // Fetch news articles based on category 
 async function fetchNews(category) {
     let url = '';
-    const apiKey = 'YOUR_MEDISTACK_API_KEY'; // Use your Mediastack API key here
+    const apiKey = 'a99ee6c059282c7aa3e69e880de401c5'; // Use your Mediastack API key here
 
     switch (category) {
         case 'politics':
