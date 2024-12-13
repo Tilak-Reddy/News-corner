@@ -33,7 +33,7 @@ async function fetchNews(category) {
 
     try {
         // Fetch the news data
-        const response = await fetch(url);
+        const response = await fetch(http://api.mediastack.com/v1/news);
 
         // Log the raw response for debugging
         console.log('API Response:', response);
